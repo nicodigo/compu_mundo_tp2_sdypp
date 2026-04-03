@@ -14,6 +14,11 @@ def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/health")
+def get_ping():
+    return {"status": "ok"}
+
+
 @app.put("/contar_palabras")
 def contar_palabras(texto: Texto):
     tratado: str = re.sub(r'[^a-zA-ZáéíóúÁÉÍÓÚñÑ]', ' ', texto.cuerpo_texto)
