@@ -38,3 +38,6 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# tests de unidad
+test*

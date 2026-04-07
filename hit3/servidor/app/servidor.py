@@ -215,9 +215,7 @@ def iniciar_eleccion():
         except requests.RequestException:
             pass
 
-    print(f"{NODE_ID}, soy lider?")
     if not respuestas:
-        print(f"SI!!! yo {NODE_ID}, me declaro lider")
         declarar_lider()
     else:
         threading.Timer(7.0, verificar_lider_elegido).start()
@@ -236,8 +234,7 @@ def declarar_lider():
             requests.post(f"{peer}/coordinator",
                           json={"id_peer": NODE_ID, "url_peer": MI_URL},
                           timeout=1)
-            print(f"yo {NODE_ID}, me declaro como lider a {peer}")
-        except requests.RequestException:
+        except:
             pass
 
 
@@ -246,7 +243,7 @@ def id_de_peer(peer: str) -> int:
         respuesta = requests.get(f"{peer}/health", timeout=1).json()
         peer_id = respuesta.get("id")
         return peer_id
-    except requests.RequestException:
+    except:
         return -1
 
 
