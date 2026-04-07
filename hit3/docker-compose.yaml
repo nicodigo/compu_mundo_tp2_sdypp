@@ -1,0 +1,53 @@
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - servidor1
+      - servidor2
+      - servidor3
+    networks:
+      - red_servidores
+
+  servidor1:
+    build: ./servidor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      NODE_ID: 1
+      MI_URL: "http://servidor1:8000"
+      MI_RED: ${RED_SERVIDORES}
+      PEERS: "http://servidor2:8000,http://servidor3:8000"
+    networks:
+      - red_servidores
+
+  servidor2:
+    build: ./servidor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      NODE_ID: 2
+      MI_URL: "http://servidor2:8000"
+      MI_RED: ${RED_SERVIDORES}
+      PEERS: "http://servidor1:8000,http://servidor3:8000"
+    networks:
+      - red_servidores
+
+  servidor3:
+    build: ./servidor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      NODE_ID: 3
+      MI_URL: "http://servidor3:8000"
+      MI_RED: ${RED_SERVIDORES}
+      PEERS: "http://servidor1:8000,http://servidor2:8000"
+    networks:
+      - red_servidores
+
+networks:
+  red_servidores:
+    name: ${RED_SERVIDORES}
