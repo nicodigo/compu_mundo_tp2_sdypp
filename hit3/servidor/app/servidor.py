@@ -8,6 +8,8 @@ import docker
 import time
 import os
 import threading
+import socket
+from urllib.parse import urlparse
 
 
 class Tarea(BaseModel):
@@ -67,9 +69,16 @@ def devolver_tareas():
 
 @app.get("/health")
 def devolver_health():
+    url_lider: str | None = None
+    if estado.lider_url is not None:
+        dominio = urlparse(estado.lider_url).hostname
+        if dominio is not None:
+            url_lider = socket.gethostbyname(dominio)
+
     return{"id": NODE_ID,
            "ok": True,
            "lider_id": estado.lider_id,
+           "lider_url": url_lider,
            "en_eleccion": estado.en_eleccion,
            }
 
@@ -261,7 +270,6 @@ def monitorear_lider():
             requests.get(f"{lider_url}/health", timeout=2)
         except requests.RequestException:
             iniciar_eleccion()
-
 
 threading.Timer(5.0,
                 monitorear_lider,
