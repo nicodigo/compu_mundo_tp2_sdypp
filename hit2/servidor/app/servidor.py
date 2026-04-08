@@ -110,7 +110,7 @@ def recibir_nueva_tarea(tarea: TareaRemota) -> Resultado | Fallo:
     print("tarea existe")
 
     try:
-        pull_imagen(tarea.imagen, False)
+        pull_imagen(tarea.imagen, True)
     except ImageNotFound:
         return Fallo(estado="error",
                      mensaje="La imagen no se pudo encontrar",
