@@ -1,7 +1,7 @@
 #!/bin/bash
 
 URL="http://localhost:8080/getRemoteTask"
-NUM_REQUESTS=150
+NUM_REQUESTS=75
 
 for i in $(seq 1 $NUM_REQUESTS); do
     curl -X POST "$URL" \

@@ -1,7 +1,16 @@
 services:
   servidor1:
     image: nicodigo/servidor_hit2:1.0
+    ports:
+      - "8080:8000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      MAX_WORKERS: "4"
+      MAX_WORKERS: "1"
+    networks:
+      - mi_red
+
+networks:
+  mi_red:
+    name: mi_red
+    external: true
