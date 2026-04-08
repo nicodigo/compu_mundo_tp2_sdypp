@@ -81,7 +81,7 @@ docker run \
   --network mi_red \
   --name servidor \
   -p 8080:8000 \
-  servidor_hit1:v1
+  nicodigo/servidor_hit1:v1
 ```
 
 ## Dependencias relevantes

@@ -182,15 +182,9 @@ docker network create mi_red
 ```
 
 ### Iniciar el servidor
-
+** En el directorio del servidor **
 ```bash
-docker run \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  --name servidor \
-  -p 8080:8000 \
-  --network mi_red \
-  -e MAX_WORKERS=4 \
-  nicodigo/servidor_hit2:1.0
+docker compose up
 ```
 
 El servidor queda disponible en `http://localhost:8080`.
@@ -217,23 +211,6 @@ Se ejecuta `ejecutar_n_curls.sh` (150 requests en paralelo) para cada valor de `
 ```
 Throughput = tareas_completadas / tiempo_total_minutos
 ```
-
-### Resultados
-
-| MAX_WORKERS | Tiempo total (s) | Tareas completadas | Throughput (tareas/min) | Speedup relativo |
-|-------------|------------------|--------------------|--------------------------|------------------|
-| 1           |                  |                    |                          | 1.00×            |
-| 2           |                  |                    |                          |                  |
-| 4           |                  |                    |                          |                  |
-| 8           |                  |                    |                          |                  |
-
-### Curva de escalabilidad
-
-> _(Insertar gráfico: eje X = MAX_WORKERS, eje Y = throughput)_
-
-### Análisis
-
-> _(Completar con observaciones: ¿el speedup es lineal? ¿a partir de qué valor de N se satura?)_
 
 ### Recursos compartidos como cuellos de botella
 
