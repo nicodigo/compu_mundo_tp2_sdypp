@@ -16,6 +16,10 @@ jobs:
             image: ${{ vars.DOCKERHUB_USERNAME }}/servidor_hit1
           - context: ./hit1/worker
             image: ${{ vars.DOCKERHUB_USERNAME }}/worker_hit1
+          - context: ./hit2/servidor
+            image: ${{ vars.DOCKERHUB_USERNAME }}/servidor_hit2
+          - context: ./hit3/servidor
+            image: ${{ vars.DOCKERHUB_USERNAME }}/servidor_hit3
 
     steps:
       - name: Checkout
