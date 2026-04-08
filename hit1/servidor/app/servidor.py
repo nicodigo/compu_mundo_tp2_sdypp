@@ -107,7 +107,7 @@ def esperar_worker(url: str, reintentos: int = 10, delay: float = 0.5) -> bool:
         try:
             requests.get(url)
             return True
-        except requests.RequestException:
+        except:
             time.sleep(delay)
     return False
 
