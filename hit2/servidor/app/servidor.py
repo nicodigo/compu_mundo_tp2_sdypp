@@ -8,6 +8,7 @@ import docker
 import time
 import threading
 from queue import Queue
+import os
 
 
 app = FastAPI()
@@ -16,7 +17,7 @@ TAREAS = ["ocurrencias_palabras",
           ]
 cliente = docker.from_env()
 
-MAX_WORKERS = 4
+MAX_WORKERS = int(os.getenv("MAX_WORKERS", 4))
 semaforo_workers = threading.Semaphore(MAX_WORKERS)
 
 cola_tareas = Queue(maxsize=50)
@@ -73,13 +74,13 @@ class Resultado(BaseModel):
 
 class Tarea():
     def __init__(self, tarea_id, timestamp, tarea_remota, evento):
-        self.tarea_id = tarea_id
-        self.timestamp = timestamp
-        self.tarea_remota = tarea_remota
+        self.tarea_id: int = tarea_id
+        self.timestamp: int = timestamp
+        self.tarea_remota: TareaRemota = tarea_remota
 
-        self.estado = "pendiente"
-        self.reintentos = 0
-        self.resultado = None
+        self.estado: str = "pendiente"
+        self.reintentos: int = 0
+        self.resultado: Resultado | None = None
         self.evento = evento
 
 
