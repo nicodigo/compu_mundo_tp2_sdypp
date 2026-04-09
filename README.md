@@ -2,6 +2,6 @@
 
 
 ## Videos:
-- [HIT #1](https://studio.youtube.com/video/Hl8HEeWBSU0/edit)
-- [HIT #2](https://studio.youtube.com/video/Yfkk7MJTo_I/edit)
-- [HIT #3](https://studio.youtube.com/video/ncTOdE0r704/edit)
+- [HIT #1](https://youtu.be/Hl8HEeWBSU0)
+- [HIT #2](https://youtu.be/Yfkk7MJTo_I)
+- [HIT #3](https://youtu.be/ncTOdE0r704)
